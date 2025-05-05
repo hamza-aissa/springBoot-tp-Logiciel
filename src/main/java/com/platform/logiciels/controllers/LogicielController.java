@@ -1,8 +1,10 @@
 package com.platform.logiciels.controllers;
 
+import com.platform.logiciels.LogicielsApplication;
 import com.platform.logiciels.entities.Logiciel;
 import com.platform.logiciels.services.LogicielService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,10 +21,16 @@ public class LogicielController {
     @Autowired
     LogicielService logicielService;
 
-    @RequestMapping("/ListeLogiciels")
-    public String listeLogiciels(ModelMap modelMap) {
-        List<Logiciel> logiciels = logicielService.getAllLogiciel();
-        modelMap.addAttribute("logiciels", logiciels);
+
+    @RequestMapping("/listeLogiciels")
+    public String listeLogiciels(ModelMap modelMap,
+                                @RequestParam (name="page",defaultValue = "0") int page,
+                                @RequestParam (name="size", defaultValue = "2") int size)
+    {
+        Page<Logiciel> logics = logicielService.getAllLogicielParPage(page, size);
+        modelMap.addAttribute("logiciels", logics);
+        modelMap.addAttribute("pages", new int[logics.getTotalPages()]);
+        modelMap.addAttribute("currentPage", page);
         return "listeLogiciels";
     }
 
@@ -48,7 +56,9 @@ public class LogicielController {
 
     @RequestMapping("/supprimerLogiciel")
     public String supprimerLogiciel(@RequestParam("id") Long id,
-                                    ModelMap modelMap) {
+                                    ModelMap modelMap,
+                                    @RequestParam (name="page",defaultValue = "0") int page,
+                                    @RequestParam (name="size", defaultValue = "2") int size)  {
         logicielService.deleteLogicielById(id);
         List<Logiciel> logiciels = logicielService.getAllLogiciel();
         modelMap.addAttribute("logiciels", logiciels);

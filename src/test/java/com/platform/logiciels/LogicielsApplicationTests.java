@@ -2,10 +2,12 @@ package com.platform.logiciels;
 
 import com.platform.logiciels.entities.Logiciel;
 import com.platform.logiciels.repos.LogicielRepository;
+import com.platform.logiciels.services.LogicielService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.elasticsearch.DataElasticsearchTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 import java.sql.Date;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 class LogicielsApplicationTests {
     @Autowired
     private LogicielRepository logicielRepository;
+    @Autowired
+    private LogicielService logicielService;
     @Test
     void contextLoads() {
     }
@@ -51,5 +55,15 @@ class LogicielsApplicationTests {
         {
             System.out.println(l);
         }
+    }
+    @Test
+    public void testFindByNomLogicielContains() {
+        Page<Logiciel> logiciels = logicielService.getAllLogicielParPage(0, 2);
+        System.out.println(logiciels.getSize());
+        System.out.println(logiciels.getTotalElements());
+        System.out.println(logiciels.getTotalPages());
+        logiciels.getContent().forEach(l -> {
+            System.out.println(l.toString());
+        });
     }
 }
