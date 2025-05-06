@@ -1,88 +1,89 @@
 package com.platform.logiciels.entities;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.sql.Date;
 
 @Entity
 public class Logiciel {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLogiciel;
     private String nomLogiciel;
     private String versionLogiciel;
     private Float prixLogiciel;
     private Date datePublicationLogiciel;
-    private String devloppeurLogiciel;
+
+    @ManyToOne
+    private Devloppeur devloppeur;
     public Logiciel() {
         super();
     }
-
-    public Logiciel(String nomLogiciel, String versionLogiciel, Float prixLogiciel, Date datePublicationLogiciel, String devloppeurLogiciel) {
+    public Logiciel(String nomLogiciel, String versionLogiciel, Float prixLogiciel, Date datePublicationLogiciel) {
         super();
         this.nomLogiciel = nomLogiciel;
         this.versionLogiciel = versionLogiciel;
         this.prixLogiciel = prixLogiciel;
         this.datePublicationLogiciel = datePublicationLogiciel;
-        this.devloppeurLogiciel = devloppeurLogiciel;
     }
-
-
-
-
 
     public Long getIdLogiciel() {
         return idLogiciel;
-    }
-
-    public void setIdLogiciel(Long idLogiciel) {
-        this.idLogiciel = idLogiciel;
     }
 
     public String getNomLogiciel() {
         return nomLogiciel;
     }
 
-    public void setNomLogiciel(String nomLogiciel) {
-        this.nomLogiciel = nomLogiciel;
-    }
-
     public String getVersionLogiciel() {
         return versionLogiciel;
-    }
-
-    public void setVersionLogiciel(String versionLogiciel) {
-        this.versionLogiciel = versionLogiciel;
     }
 
     public Float getPrixLogiciel() {
         return prixLogiciel;
     }
 
-    public void setPrixLogiciel(Float prixLogiciel) {
-        this.prixLogiciel = prixLogiciel;
+    public void setIdLogiciel(Long idLogiciel) {
+        this.idLogiciel = idLogiciel;
     }
 
-    public Date getDatePublicationLogiciel() {
-        return datePublicationLogiciel;
+    public void setNomLogiciel(String nomLogiciel) {
+        this.nomLogiciel = nomLogiciel;
+    }
+
+    public void setVersionLogiciel(String versionLogiciel) {
+        this.versionLogiciel = versionLogiciel;
+    }
+
+    public void setPrixLogiciel(Float prixLogiciel) {
+        this.prixLogiciel = prixLogiciel;
     }
 
     public void setDatePublicationLogiciel(Date datePublicationLogiciel) {
         this.datePublicationLogiciel = datePublicationLogiciel;
     }
 
-    public String getDevloppeurLogiciel() {
-        return devloppeurLogiciel;
+    public void setDevloppeur(Devloppeur devloppeur) {
+        this.devloppeur = devloppeur;
     }
 
-    public void setDevloppeurLogiciel(String devloppeurLogiciel) {
-        this.devloppeurLogiciel = devloppeurLogiciel;
+    public Date getDatePublicationLogiciel() {
+        return datePublicationLogiciel;
     }
 
+    public Devloppeur getDevloppeur() {
+        return devloppeur;
+    }
     @Override
     public String toString() {
-        return super.toString();
+        return "Logiciel{" +
+                "idLogiciel=" + idLogiciel +
+                ", nomLogiciel='" + nomLogiciel + '\'' +
+                ", versionLogiciel='" + versionLogiciel + '\'' +
+                ", prixLogiciel=" + prixLogiciel +
+                ", datePublicationLogiciel=" + datePublicationLogiciel +
+                ", devloppeur=" + devloppeur +
+                '}';
     }
+
 }

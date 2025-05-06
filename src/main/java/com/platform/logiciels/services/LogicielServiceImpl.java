@@ -1,5 +1,6 @@
 package com.platform.logiciels.services;
 
+import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
 import com.platform.logiciels.repos.LogicielRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,23 @@ public class LogicielServiceImpl implements LogicielService {
     @Override
     public Page<Logiciel> getAllLogicielParPage(int page , int size) {
         return logicielRepository.findAll(PageRequest.of(page,size));
+    }
+    @Override
+    public List<Logiciel> findByDevloppeur(Devloppeur devloppeur) {
+        return logicielRepository.findByDevloppeur(devloppeur);
+    }
+
+    @Override
+    public List<Logiciel> findByDevloppeurIdDevloppeur(Long id) {
+        return logicielRepository.findByDevloppeurIdDevloppeur(id);
+    }
+    @Override
+    public List<Logiciel> findByOrderByNomLogicielAsc() {
+        return logicielRepository.findByOrderByNomLogicielAsc();
+    }
+
+    @Override
+    public List<Logiciel> trierLogicielsNomsPrix() {
+        return logicielRepository.trierLogicielsNomsPrix();
     }
     }

@@ -1,5 +1,6 @@
 package com.platform.logiciels;
 
+import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
 import com.platform.logiciels.repos.LogicielRepository;
 import com.platform.logiciels.services.LogicielService;
@@ -23,7 +24,7 @@ class LogicielsApplicationTests {
     }
     @Test
     void testCreateLogiciel() {
-        Logiciel TestLogiciel = new Logiciel("AccountingSoftware", "2024.1", 2.20f, new Date(System.currentTimeMillis()), "hamza");
+        Logiciel TestLogiciel = new Logiciel("AccountingSoftware", "2024.1", 2.20f, new Date(System.currentTimeMillis()));
         logicielRepository.save(TestLogiciel);
     }
     @Test
@@ -57,7 +58,7 @@ class LogicielsApplicationTests {
         }
     }
     @Test
-    public void testFindByNomLogicielContains() {
+    public void testFindByNomLogicielPagination() {
         Page<Logiciel> logiciels = logicielService.getAllLogicielParPage(0, 2);
         System.out.println(logiciels.getSize());
         System.out.println(logiciels.getTotalElements());
@@ -66,4 +67,33 @@ class LogicielsApplicationTests {
             System.out.println(l.toString());
         });
     }
+    @Test
+    public void testFindByNomLogiciel()
+    {
+        List<Logiciel> logiciels = logicielRepository.findByNomLogiciel("Logiciel A");
+        for (Logiciel l : logiciels)
+        {
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    public void testFindByNomLogicielContains()
+    {
+        List<Logiciel> logiciels = logicielRepository.findByNomLogicielContains("Logiciel");
+        for (Logiciel l : logiciels)
+        {
+            System.out.println(l);
+        }
+    }
+    @Test
+    public void testfindByNomPrix()
+    {
+        List<Logiciel>  logs = logicielRepository.findByNomPrix("iphone X", 1000.0);
+        for (Logiciel l : logs)
+        {
+            System.out.println(l);
+        }
+    }
+
 }

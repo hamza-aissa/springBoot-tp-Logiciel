@@ -1,6 +1,7 @@
 package com.platform.logiciels;
 
 import com.platform.logiciels.entities.Logiciel;
+import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.services.LogicielService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +18,10 @@ public class LogicielsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        logicielService.saveLogiciel(new Logiciel("Logiciel1", "1.0", 100.0f, java.sql.Date.valueOf("2023-01-01"), "Dev1"));
-        logicielService.saveLogiciel(new Logiciel("Logiciel2", "1.1", 150.0f, java.sql.Date.valueOf("2023-02-01"), "Dev2"));
-        logicielService.saveLogiciel(new Logiciel("Logiciel3", "1.2", 200.0f, java.sql.Date.valueOf("2023-03-01"), "Dev3"));
+
+        logicielService.saveLogiciel(new Logiciel("Logiciel1", "1.0", 100.0f, java.sql.Date.valueOf("2023-01-01")));
+        logicielService.saveLogiciel(new Logiciel("Logiciel2", "1.1", 150.0f, java.sql.Date.valueOf("2023-02-01")));
+        logicielService.saveLogiciel(new Logiciel("Logiciel3", "1.2", 200.0f, java.sql.Date.valueOf("2023-03-01")));
+
     }
 }

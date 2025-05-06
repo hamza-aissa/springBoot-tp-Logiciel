@@ -1,4 +1,5 @@
 package com.platform.logiciels.services;
+import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
 import org.springframework.data.domain.Page;
 
@@ -12,4 +13,8 @@ public interface LogicielService {
     Logiciel getLogiciel(Long id);
     List<Logiciel> getAllLogiciel();
     Page<Logiciel> getAllLogicielParPage(int page , int size);
+    List<Logiciel> findByDevloppeur(Devloppeur devloppeur);
+    List<Logiciel> findByDevloppeurIdDevloppeur(Long id);
+    List<Logiciel> findByOrderByNomLogicielAsc();
+    List<Logiciel> trierLogicielsNomsPrix();
  }
