@@ -4,9 +4,10 @@ import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
-
+@RepositoryRestResource(path = "rest")
 public interface LogicielRepository extends JpaRepository<Logiciel, Long> {
     List<Logiciel> findByNomLogiciel(String nomLogiciel);
     List<Logiciel> findByNomLogicielContains(String nomLogiciel);
