@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" type="text/css"
       href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 <head>
@@ -30,8 +30,8 @@
                     <td th:text="${l.getPrixLogiciel()}"></td>
                     <td th:text="${l.getVersionLogiciel()}"></td>
                     <td th:text="${l.getDatePublicationLogiciel()}"></td>
-                    <td><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')" th:href="@{supprimerLogiciel(id=${l.getIdLogiciel()},  page=${currentPage},size=${size})}">Supprimer</a></td>
-                    <td><a class="btn btn-success" th:href="@{modifierLogiciel(id=${l.getIdLogiciel()},page=${currentPage},size=${size})}">Editer</a></td>
+                    <td  sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')" th:href="@{supprimerLogiciel(id=${l.getIdLogiciel()},  page=${currentPage},size=${size})}">Supprimer</a></td>
+                    <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{modifierLogiciel(id=${l.getIdLogiciel()},page=${currentPage},size=${size})}">Editer</a></td>
                     <td th:if="${l.devloppeur != null}" th:text="${l.devloppeur.getNomDevloppeur()}"></td>
                     <td th:if="${l.devloppeur == null}" th:text="'Aucun devloppeur'"></td>
 
