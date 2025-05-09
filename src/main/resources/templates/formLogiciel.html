@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet"
+      type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>Ajout des logiciels</title>
+</head>
+<body>
+<div th:replace="template"></div>
+<div class="container mt-5">
+    <div class="card">
+
+        <div class="card-header" th:if="${mode=='edit'}">Modification des Logicel </div>
+        <div class="card-header" th:if="${mode=='new'}">Ajout des logiciels</div>
+        <div class="card-body">
+            <form th:action="@{saveLogiciel}" method="post">
+                <div class="form-group">
+                    <label class="control-label">ID logiciel :</label>
+                    <input type="text" name="idLogiciel" class="form-control" th:value="${logiciel.getIdLogiciel()}" readonly/>
+                    <span th:errors="${logiciel.idLogiciel}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nom logiciel :</label>
+                    <input type="text" name="nomLogiciel" class="form-control" th:value="${logiciel.getNomLogiciel()}" />
+                    <span th:errors="${logiciel.nomLogiciel}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Version logiciel :</label>
+                    <input type="text" name="versionLogiciel" class="form-control" th:value="${logiciel.getVersionLogiciel()}"/>
+                    <span th:errors="${logiciel.versionLogiciel}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Prix logiciel :</label>
+                    <input type="text" name="prixLogiciel" class="form-control" th:value="${logiciel.getPrixLogiciel()}"/>
+                    <span th:errors="${logiciel.prixLogiciel}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date de publication :</label>
+                    <input type="date" name="datePublicationLogiciel" class="form-control" th:value="${logiciel.getDatePublicationLogiciel()}"/>
+                    <span th:errors="${logiciel.datePublicationLogiciel}" class="text-danger"></span>
+                </div>
+                <input  name="page" class="form-control" th:value="${page}"  />
+                <input  name="size" class="form-control" th:value="${size}"  />
+                <div class="form-group">
+                    <label class="control-label">Devloppeur :</label>
+                    <!-- For edit mode or when a developer is already assigned -->
+                    <select name="devloppeurs" class="form-control"
+                            th:if="${logiciel.devloppeur != null}"
+                            th:value="${logiciel.devloppeur.getIdDevloppeur()}">
+                        <option th:each="d : ${Devloppeurs}"
+                                th:value="${d.getIdDevloppeur()}"
+                                th:text="${d.getNomDevloppeur()}"
+                                th:selected="${d.getIdDevloppeur() == logiciel.devloppeur.getIdDevloppeur()}">
+                        </option>
+                    </select>
+
+                    <!-- For new mode or when no developer is assigned -->
+                    <select name="devloppeurs" class="form-control"
+                            th:if="${logiciel.devloppeur == null}">
+                        <option th:each="d : ${Devloppeurs}"
+                                th:value="${d.getIdDevloppeur()}"
+                                th:text="${d.getNomDevloppeur()}">
+                        </option>
+                    </select>
+                </div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

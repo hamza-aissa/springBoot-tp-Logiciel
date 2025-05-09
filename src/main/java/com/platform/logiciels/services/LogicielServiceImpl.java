@@ -2,6 +2,7 @@ package com.platform.logiciels.services;
 
 import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
+import com.platform.logiciels.repos.DevloppeurRepository;
 import com.platform.logiciels.repos.LogicielRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ import java.util.List;
 public class LogicielServiceImpl implements LogicielService {
     @Autowired
     LogicielRepository logicielRepository;
+    @Autowired
+    DevloppeurRepository devloppeurRepository;
 
     public LogicielServiceImpl() {
         super();
@@ -70,4 +73,8 @@ public class LogicielServiceImpl implements LogicielService {
     public List<Logiciel> trierLogicielsNomsPrix() {
         return logicielRepository.trierLogicielsNomsPrix();
     }
+    @Override
+    public List<Devloppeur> getAllDevloppeurs() {
+        return devloppeurRepository.findAll();
+        }
     }

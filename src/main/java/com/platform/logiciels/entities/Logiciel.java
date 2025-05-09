@@ -1,17 +1,25 @@
 package com.platform.logiciels.entities;
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Logiciel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLogiciel;
+    @NotNull
+    @Size (min = 4,max = 15)
     private String nomLogiciel;
     private String versionLogiciel;
+    @Min(value = 10)
+    @Max(value = 10000)
     private Float prixLogiciel;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent(message = "La date de publication doit être dans le passé ou aujourd'hui")
     private Date datePublicationLogiciel;
 
     @ManyToOne

@@ -19,7 +19,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom logiciel</th>
-                    <th>Devloppeur</th>
                     <th>Prix</th>
                     <th>Version</th>
                     <th>Date sortie</th>
@@ -28,11 +27,14 @@
                 <tr th:each="l:${logiciels}">
                     <td th:text="${l.getIdLogiciel()}"></td>
                     <td th:text="${l.getNomLogiciel()}"></td>
-                    <td th:text="${l.getDevloppeurLogiciel()}"></td>
                     <td th:text="${l.getPrixLogiciel()}"></td>
                     <td th:text="${l.getVersionLogiciel()}"></td>
                     <td th:text="${l.getDatePublicationLogiciel()}"></td>
                     <td><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')" th:href="@{supprimerLogiciel(id=${l.getIdLogiciel()},  page=${currentPage},size=${size})}">Supprimer</a></td>
+                    <td><a class="btn btn-success" th:href="@{modifierLogiciel(id=${l.getIdLogiciel()},page=${currentPage},size=${size})}">Editer</a></td>
+                    <td th:if="${l.devloppeur != null}" th:text="${l.devloppeur.getNomDevloppeur()}"></td>
+                    <td th:if="${l.devloppeur == null}" th:text="'Aucun devloppeur'"></td>
+
                 </tr>
             </table>
             <ul class="nav nav-pills">
@@ -47,3 +49,6 @@
 </div>
 </body>
 </html>
+
+
+

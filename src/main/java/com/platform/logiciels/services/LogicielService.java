@@ -17,4 +17,5 @@ public interface LogicielService {
     List<Logiciel> findByDevloppeurIdDevloppeur(Long id);
     List<Logiciel> findByOrderByNomLogicielAsc();
     List<Logiciel> trierLogicielsNomsPrix();
+    List<Devloppeur> getAllDevloppeurs();
  }
