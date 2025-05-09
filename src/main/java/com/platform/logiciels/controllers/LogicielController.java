@@ -3,6 +3,8 @@ package com.platform.logiciels.controllers;
 import com.platform.logiciels.entities.Devloppeur;
 import com.platform.logiciels.entities.Logiciel;
 import com.platform.logiciels.services.LogicielService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +31,17 @@ public class LogicielController {
     public String welcome() {
         return "index";
     }
-
+    @GetMapping("/login")
+    public String login()
+    {
+        return "login";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) throws ServletException
+    {
+        request.logout();
+        return "redirect:/login";
+    }
 
     @RequestMapping("/listeLogiciels")
     public String listeLogiciels(ModelMap modelMap,
